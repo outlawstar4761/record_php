@@ -107,4 +107,54 @@ abstract class Record implements RecordBehavior{
         }
         return $this;
     }
+    public static function search($db,$table,$primaryKey,$key,$value){
+        $data = array();
+        $results = $GLOBALS['db']
+            ->database($db)
+            ->table($table)
+            ->select($primaryKey)
+            ->where($key,"like","'%" . $value . "%'")
+            ->get();
+        while($row = mysqli_fetch_assoc($results)){
+            $data[] = $row[$primaryKey];
+        }
+        return $data;
+    }
+    public static function getAll($db,$table,$primaryKey){
+        $data = array();
+        $results = $GLOBALS['db']
+            ->database($db)
+            ->table($table)
+            ->select($primaryKey)
+            ->get();
+        while($row = mysqli_fetch_assoc($results)){
+            $data[] = $row[$primaryKey];
+        }
+        return $data;
+    }
+    public static function getRecent($db,$table,$primaryKey,$limit){
+        $data = array();
+        $results = $GLOBALS['db']
+            ->database($db)
+            ->table($table)
+            ->select($primaryKey)
+            ->orderBy($primaryKey . " desc limit " . $limit)
+            ->get();
+        while($row = mysqli_fetch_assoc($results)){
+            $data[] = $row[$primaryKey];
+        }
+        return $data;
+    }
+    public static function browse($db,$table,$key){
+        $data = array();
+        $results = $GLOBALS['db']
+            ->database($db)
+            ->table($table)
+            ->select("distinct " . $key)
+            ->get();
+        while($row = mysqli_fetch_assoc($results)){
+            $data[] = $row[$key];
+        }
+        return $data;
+    }
 }
