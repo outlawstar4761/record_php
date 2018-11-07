@@ -1,0 +1,3 @@
+[submodule "db_php"]
+	path = db_php
+	url = https://github.com/outlawstar4761/db_php
