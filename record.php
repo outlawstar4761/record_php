@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../db/db.php';
+require_once __DIR__ . '/db_php/db.php';
 require_once __DIR__ . '/recordInterface.php';
 
 if(!isset($GLOBALS['db'])){
